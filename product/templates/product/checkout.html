@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock  %}
+{% block body %}
+
+{% comment %} Cart Details {% endcomment %}
+<div class = "container border border-primary my-5">
+{% for cart in cart_data  %}
+
+
+    <div class = "row p-3 ">
+        <div class = "col-md-6 ">
+            <p>{{cart.quantity}} x {{cart.product.name}}</p>
+    
+        </div>
+        <div class = "col-md-6">
+           <p class="text-center">{{cart.product.price}}</p>
+        </div>
+    </div>    
+    <hr class="bg-danger border-1 ">
+
+
+{% endfor %}
+    <div class = "row p-3 ">
+        <div class = "col-md-6 ">
+            <b>Your Total</b>
+    
+        </div> 
+        <div class = "col-md-6 text-center">
+           <b>{{total}}</b>
+        </div>
+    </div>
+</div>
+
+
+
+{% comment %} Checkout Form {% endcomment %}
+
+
+<div class = "container">
+    {% if cart_data %}
+    <div class = "row p-3 ">
+        <div class = "col-md-12">
+            <h1>Enter Shipping Details</h1>
+    
+        </div>
+    </div>
+    <hr class="bg-danger border-2 border-top border-danger">    
+   
+    <form class = "" action = "{% url "checkout" %}" method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class = "row p-3 ">
+        
+        <div class = "col-md-4">
+            <label>{{checkout_form.name.label_tag}}</label>
+            {{checkout_form.name}}
+            
+        </div>
+        <div class = "col-md-2 text-center">
+        </div>
+        <div class = "col-md-4">
+            <label>{{checkout_form.email.label_tag}}</label>
+            {{checkout_form.email}}
+            
+        </div>
+    </div>  
+ 
+    <div class = "row p-3 ">
+        
+        <div class = "col-md-10">
+            <label>{{checkout_form.address.label_tag}}</label>
+            {{checkout_form.address}}
+            
+        </div>
+       
+    </div>  
+    <div class = "row p-3">
+        
+        <div class = "col-md-4">
+            <label>{{checkout_form.city.label_tag}}</label>
+            {{checkout_form.city}}
+            
+        </div>
+       
+        <div class = "col-md-4">
+            <label>{{checkout_form.state.label_tag}}</label>
+            {{checkout_form.state}}
+            
+        </div>
+        <div class = "col-md-2">
+            <label>{{checkout_form.zip_code.label_tag}}</label>
+            {{checkout_form.zip_code}}
+        </div>    
+    </div> 
+    <div class = "row p-3" >
+        <div class = "col-md-4">
+            <p>Amount to be paid</p>
+            <b class = "d-inline p-2 bg-light text-black">{{total}}</b>
+        </div>
+    </div> 
+    <div class = "row p-3" >
+        <div class = "col-md-4">
+            <button type="submit" class="btn btn-primary">Pay Now</button>
+        </div>
+    </div>
+</form>     
+    
+{% else %}
+    <div class = "row p-3 ">
+        <div class = "col-md-12">
+            <h1>Cart is Empty</h1>
+
+        </div>
+    </div>
+<hr class="bg-danger border-2 border-top border-danger">    
+{% endif %}  
+
+
+</div>    
+
+
+
+{% endblock  %}

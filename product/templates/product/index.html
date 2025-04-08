@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Product List{% endblock %}
+
+
+
+
+{% block body %}
+
+{% comment %} Search Bar {% endcomment %}
+
+<div class="container mt-3">
+</div>    
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+        </div>    
+        <div class="col-md-8">
+            <form class="form-inline my-2 my-lg-0" method = "POST" action = "/1">
+                {% comment %} <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> {% endcomment %}
+                {% csrf_token %}
+               
+                    {{form}}
+                    
+                
+            </form>
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>Search</button>
+        </div>
+    </div>
+</div>        
+
+   
+
+
+{% comment %} 4 Images and its button {% endcomment %}
+<div class="container mt-3">
+    <div class="row">
+        
+        </div>
+    </div>
+
+<div class="container ">
+    <div class="row ">
+        <div class="col-2">
+        </div>   
+        {% for product in product_list %}
+        <div class="col-md-2 p-3 border bg-light ">
+            <img src="{{ product.image.url }}" class="img-fluid" alt="{{product.name}}" width = "268" height = "360">
+            
+        </div>
+        {% endfor %} 
+        
+        <div class="col-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+        </div>   
+        {% for product in product_list %}
+        <div class="col-md-2 p-3 border bg-light">
+            
+            <p class = "p-3 "> {{product.name}} </p>
+            
+        </div>
+        {% endfor %} 
+        
+        <div class="col-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 ">
+        </div>   
+        {% for product in product_list %}
+        <div class="col-md-2 p-3 border bg-light">
+            
+            <p > {{product.price}} </p>
+            
+        </div>
+        {% endfor %} 
+        
+        <div class="col-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 ">
+        </div>   
+        {% for product in product_list %}
+        <div class="col-md-2 p-3 border bg-light">
+            <form method="POST" action = "{% url "cart" %}", class = "form-inline my-2 my-lg-0">
+                {% comment %} <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> {% endcomment %}
+                {% csrf_token %}
+                <input type="hidden" name='product' value={{product.id}}>
+                <a href="{% url 'search' product.name 1 %}" class="btn btn-warning btn-sm">View</a>
+                <button type="submit" class="btn btn-warning btn-sm">Add to Cart</button>
+            
+            </form>    
+        </div>
+        {% endfor %} 
+        
+        <div class="col-2">
+        </div>
+    </div>
+</div>        
+
+
+{% comment %} Pagination button {% endcomment %}
+<div class="container mt-3">
+    <div class="row">
+        
+        </div>
+    </div>
+
+<ul class="pagination justify-content-center">
+
+    {% if product_list.has_previous %}
+    <li class="page-item"> <a class="page-link" href="{% url 'index' product_list.previous_page_number %}">
+            Previous Page
+        </a> </li>
+    {% endif%}
+    {% if product_list.has_next %}
+    <li class="page-item"><a class="page-link" href="{% url 'index' product_list.next_page_number %}">
+            Next Page
+        </a> </li>
+    {% endif%}
+
+</ul>
+
+
+
+    
+
+{% endblock  %}
+
+
+

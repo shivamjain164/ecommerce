@@ -1,0 +1,91 @@
+{% comment %} {% load static  %} {% endcomment %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{% endblock  %}</title>
+        <meta name="description" content="">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1"> {% endcomment %}
+        {% comment %} <link rel="stylesheet" href="https://bootswatch.com/5/cerulean/bootstrap.min.css" type="text/css"> {% endcomment %}
+        {% comment %} <link rel="stylesheet" href="{% static "styles.css" %}"> {% endcomment %}
+        {% block css_files %}{% endblock  %}
+ 
+    </head>
+    <body>
+       
+        {% comment %} <div class="header">
+            <h1>Header</h1>
+            <p>My supercool header</p>
+          </div>{% endcomment %}
+          <nav class="navbar navbar-dark navbar-expand-lg bg-dark" >
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url "index" 1 %}">ABC Shopping</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    
+                    <li class="nav-item">
+                    <a class="nav-link active" href="{% url "index" 1 %}">Home
+                     
+                    </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                      <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link active dropdown-toggle" href="{% url "cart" %}" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cart ({{cart_list|length}})
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            {% if cart_list %}
+                            {% for cart in  cart_list  %}
+                            <li><a class="dropdown-item" href="{% url "cart" %}">{{cart.quantity}} * {{cart.product.name}}</a></li>
+                            {% endfor %}
+                            {% else %}
+                            <li><a class="dropdown-item" href="{% url "cart" %}">No Items in Cart</a></li>  
+                            
+                            {% endif %}
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                  </li>
+     
+                 
+                </ul>
+                
+              </div>
+            </div>
+          </nav>
+        {% comment %} <div class="navbar">   
+            <p>Food App </p>
+            <a href="/food/login">Login</a>
+          
+            <a href="/food">Delete Item</a>
+            <a href="/food/addfood">Add Item</a>
+          
+        </div> {% endcomment %}
+        {% block body %}{% endblock %}
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+    </body>
+</html>
