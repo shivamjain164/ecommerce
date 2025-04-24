@@ -45,6 +45,69 @@
         </div>
     </div>
     <hr class="bg-danger border-2 border-top border-danger">    
+
+
+    {% if existing_address %}
+    <form class = "" action = "{% url "checkout" %}" method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class = "container">
+        <div class = "row p-3 ">
+            <div class = "col-md-4">
+                <label>Name</label>
+                <p>{{existing_address.name}}</p>
+                <input type = "hidden" name = "name" value = "{{existing_address.name}}">
+    
+            </div>
+            <div class = "col-md-4">
+                <label>Email</label>
+                <p>{{existing_address.email}}</p>
+                <input type = "hidden" name = "email" value = "{{existing_address.email}}">
+    
+            </div>
+        </div>
+        <div class = "row p-3 ">
+            <div class = "col-md-10">
+                <label>Address</label>
+                <p>{{existing_address.address}}</p>
+                <input type = "hidden" name = "address" value = "{{existing_address.address}}">
+    
+            </div>
+        </div>
+        <dic class = "row p-3">
+            <div class = "col-md-4">
+                <label>City</label>
+                <p>{{existing_address.city}}</p>
+                <input type = "hidden" name = "city" value = "{{existing_address.city}}">
+    
+            </div>
+            <div class = "col-md-4">
+                <label>State</label>
+                <p>{{existing_address.state}}</p>
+                <input type = "hidden" name = "state" value = "{{existing_address.state}}">
+    
+            </div>
+            <div class = "col-md-2">
+                <label>Zip Code</label>
+                <p>{{existing_address.zip_code}}</p>
+                <input type = "hidden" name = "zip_code" value = "{{existing_address.zip_code}}">
+            </div>    
+        </div>    
+        <div class = "row p-3" >
+            <div class = "col-md-4">
+                <p>Amount to be paid</p>
+                <b class = "d-inline p-2 bg-light text-black">{{total}}</b>
+            </div>
+        </div> 
+        <div class = "row p-3" >
+            <div class = "col-md-4">
+                <button type="submit" class="btn btn-primary">Pay Now</button>
+            </div>
+        </div>
+    </div>    
+</form>
+
+    
+    {% else %}
    
     <form class = "" action = "{% url "checkout" %}" method = "POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -53,6 +116,7 @@
         <div class = "col-md-4">
             <label>{{checkout_form.name.label_tag}}</label>
             {{checkout_form.name}}
+
             
         </div>
         <div class = "col-md-2 text-center">
@@ -103,6 +167,10 @@
         </div>
     </div>
 </form>     
+{% endif %}
+
+
+
     
 {% else %}
     <div class = "row p-3 ">
@@ -110,7 +178,7 @@
             <h1>Cart is Empty</h1>
 
         </div>
-    </div>
+    </div>    
 <hr class="bg-danger border-2 border-top border-danger">    
 {% endif %}  
 

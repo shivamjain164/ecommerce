@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %} Order summary {% endblock  %}
+
+{% block body %}
+<div class = "container">
+    <div class = "row">
+        <div class = "col-md-3">
+            <h3>Product</h3>
+        </div>
+        <div class = "col-md-3">
+            <h3>Quantity</h3>
+        </div>
+        <div class = "col-md-3">
+            <h3>Order ID</h3>
+        </div>
+        <div class = "col-md-3">
+            <h3>Total Paid amount</h3>
+        </div>
+    </div>
+    <hr>
+    {% for order in order_data  %}
+        
+            <div class = "row row-gap-3">
+                {% for i in order %}
+                <div class = "col-md-3">
+            
+                    {{i.product.name}}
+                
+                </div>
+                <div class = "col-md-3">
+            
+                    {{i.quantity}}
+                </div>
+                <div class = "col-md-3">
+                
+                    {{i.cart_id}}
+                </div>
+                <div class = "col-md-3">
+                    
+                    {{i.total}}
+                </div>
+                {% endfor %}
+            </div>    
+        
+        
+            
+        <hr>
+               
+    {% endfor %}
+</div>
+{% endblock  %}

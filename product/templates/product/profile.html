@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %} Profile {% endblock  %}
+
+{% block body %}
+<div class = "container">
+    <form class = "form-action" method = "POST" action = "{% url 'profile' %}">
+        {% comment %} <h1>Profile</h1> {% endcomment %}
+        {% csrf_token %}
+        <div class = "row p-3 ">
+            <div class = "col-md-4">
+                <label>Name</label>
+                <p>{{user_info.name}}</p>
+                {% comment %} <input type = "hidden" name = "name" value = "{{user_info.name}}"> {% endcomment %}
+                
+
+            </div>
+            <div class = "col-md-4">
+                <label>Email</label>
+                <p>{{user_info.email}}</p>
+                {% comment %} <input type = "hidden" name = "email" value = "{{user_info.email}}"> {% endcomment %}
+            
+
+            </div>
+        </div>
+        <div class = "row p-3 ">
+            <div class = "col-md-10">
+                <label>Address</label>
+                <p>{{user_info.address}}</p>
+                {% comment %} <input type = "hidden" name = "address" value = "{{user_info.address}}"> {% endcomment %}
+            
+
+            </div>
+        </div>
+        <div class = "row p-3">
+            <div class = "col-md-4">
+                <label>City</label>
+                <p>{{user_info.city}}</p>
+                {% comment %} <input type = "hidden" name = "city" value = "{{user_info.city}}"> {% endcomment %}
+            
+
+            </div>
+            <div class = "col-md-4">
+                <label>State</label>
+                <p>{{user_info.state}}</p>
+                {% comment %} <input type = "hidden" name = "state" value = "{{user_info.state}}"> {% endcomment %}
+            
+
+            </div>
+            <div class = "col-md-2">
+                <label>Zip Code</label>
+                <p>{{user_info.zip_code}}</p>
+                {% comment %} <input type = "hidden" name = "zip_code" value = "{{user_info.zip_code}}"> {% endcomment %}
+            
+            </div>    
+        </div> 
+        <div class = "row p-3" >
+            <div class = "col-md-4">
+                <button type="submit" class="btn btn-primary">Submit Profile</button>
+                
+
+            </div>
+        </div>    
+    </form>
+    
+</div>
+
+{% endblock  %}
