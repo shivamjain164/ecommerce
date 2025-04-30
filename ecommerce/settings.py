@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-c7=qe*s%)2d02_of&jq8ounusd90ls@-zko^p0a-fr$aap4=h6
 DEBUG = getenv("IS_DEVELOPMENT",True)
 
 ALLOWED_HOSTS = [
-    shivamjain.pythonanywhere.com
+    "shivamjain.pythonanywhere.com"
 ]
 
 
